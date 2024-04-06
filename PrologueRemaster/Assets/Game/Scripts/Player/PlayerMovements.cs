@@ -22,6 +22,10 @@ public class PlayerMovements : MonoBehaviour
 
     [SerializeField] private float _jumpForce;
 
+    [SerializeField] private float _jumpGravityDownForce;
+
+    private Coroutine _jumpGravityDownCoroutine;
+
     #endregion
 
     private void Start()
@@ -31,22 +35,20 @@ public class PlayerMovements : MonoBehaviour
         _rb2D = transform.parent.GetComponent<Rigidbody2D>();
 
         _move.action.started += StartMove;
-
         _move.action.performed += UpdateMove;
-
         _move.action.canceled += StopMove;
 
         _jump.action.started += Jump;
+        _jump.action.canceled += StopJump;
     }
     private void OnDestroy()
     {
         _move.action.started -= StartMove;
-
         _move.action.performed -= UpdateMove;
-
         _move.action.canceled -= StopMove;
 
         _jump.action.started -= Jump;
+        _jump.action.canceled -= StopJump;
     }
 
     private void FixedUpdate()
@@ -98,5 +100,33 @@ public class PlayerMovements : MonoBehaviour
         {
             _rb2D.AddForce(transform.TransformDirection(Vector3.up) * _jumpForce, ForceMode2D.Impulse);
         }
+    }
+    private void StopJump(InputAction.CallbackContext context)
+    {
+        if (!_playerBehavior.GroundCheck() && _jumpGravityDownCoroutine == null)
+        {
+            _rb2D.gravityScale = _jumpGravityDownForce;
+
+            _jumpGravityDownCoroutine = StartCoroutine(JumpGravityDownCoroutine());
+        }
+    }
+    private void ResetGravityDownForce()
+    {
+        _rb2D.gravityScale = 1f;
+
+        StopCoroutine(_jumpGravityDownCoroutine);
+        _jumpGravityDownCoroutine = null;
+    }
+    private IEnumerator JumpGravityDownCoroutine()
+    {
+        while (!_playerBehavior.GroundCheck())
+        {
+
+            yield return null;
+        }
+
+        ResetGravityDownForce();
+
+        yield return null;
     }
 }
