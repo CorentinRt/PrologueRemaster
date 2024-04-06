@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 2102906152986406963}
   - component: {fileID: 748236193547236993}
   - component: {fileID: 6386284062995060364}
+  - component: {fileID: 2808684976596442908}
   m_Layer: 0
   m_Name: Actions
   m_TagString: Untagged
@@ -161,6 +162,22 @@ MonoBehaviour:
   _moveSpeed: 300
   _jumpForce: 7
   _jumpGravityDownForce: 2
+--- !u!114 &2808684976596442908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141039878479995132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5a204987c8520a4db484696b7edf726, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attack: {fileID: -6958671174948865376, guid: c0736dc0b6070db4f8d668e2a8bdf0a2, type: 3}
+  _hitEntity: {fileID: 8454069590574736316}
+  _attackDuration: 0.5
+  _attackCooldown: 0.2
 --- !u!1 &2816003277993874347
 GameObject:
   m_ObjectHideFlags: 0
@@ -637,8 +654,8 @@ Rigidbody2D:
     serializedVersion: 2
     m_Bits: 0
   m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_SleepingMode: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &8380550244853917410
 MonoBehaviour:
@@ -672,6 +689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+  _invincibilityCooldown: 0
 --- !u!1 &9156500555696736744
 GameObject:
   m_ObjectHideFlags: 0

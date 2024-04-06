@@ -12,6 +12,12 @@ public class HealthEntity : MonoBehaviour
 
     private bool _isDead;
 
+    [SerializeField] private float _invincibilityCooldown;
+
+    private Coroutine _invincibilityCooldownCoroutine;
+
+    private bool _isInvincible;
+
     #endregion
 
     #region Test Function
@@ -28,10 +34,12 @@ public class HealthEntity : MonoBehaviour
 
     public void TakeDamage(int value)
     {
-        if (_isDead)
+        if (_isDead || _isInvincible)
         {
             return;
         }
+
+        StartInvincibility();
 
         _currentHealth -= value;
         _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
@@ -55,4 +63,30 @@ public class HealthEntity : MonoBehaviour
     {
         _isDead = true;
     }
+
+    #region Invincibility
+    private void StartInvincibility()
+    {
+        if (_invincibilityCooldownCoroutine != null)
+        {
+            _invincibilityCooldownCoroutine = StartCoroutine(InvincibilityCooldownCoroutine());
+        }
+    }
+    private void StopInvincibility()
+    {
+        if (_invincibilityCooldownCoroutine != null)
+        {
+            StopCoroutine( _invincibilityCooldownCoroutine);
+            _invincibilityCooldownCoroutine = null;
+        }
+    }
+    private IEnumerator InvincibilityCooldownCoroutine()
+    {
+        yield return new WaitForSeconds(_invincibilityCooldown);
+
+        StopInvincibility();
+
+        yield return null;
+    }
+    #endregion
 }
