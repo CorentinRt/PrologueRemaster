@@ -15,13 +15,18 @@ public class HealthEntity : MonoBehaviour
     #endregion
 
     #region Test Function
-    [Button] private void Damage10() => Damage(10);
+    [Button] private void TakeDamage10() => TakeDamage(10);
     [Button] private void Heal10() => Heal(10);
     [Button] private void TestDie() => Die();
 
     #endregion
 
-    public void Damage(int value)
+    private void Awake()
+    {
+        _currentHealth = _maxHealth;
+    }
+
+    public void TakeDamage(int value)
     {
         if (_isDead)
         {
