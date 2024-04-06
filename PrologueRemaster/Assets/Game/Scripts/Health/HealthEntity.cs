@@ -18,6 +18,10 @@ public class HealthEntity : MonoBehaviour
 
     private bool _isInvincible;
 
+    [SerializeField] private SpriteRenderer _spriteRd;
+
+    private Coroutine _damageEffectCoroutine;
+
     #endregion
 
     #region Test Function
@@ -40,6 +44,7 @@ public class HealthEntity : MonoBehaviour
         }
 
         StartInvincibility();
+        _damageEffectCoroutine = StartCoroutine(DamageEffectCoroutine());
 
         _currentHealth -= value;
         _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
@@ -88,5 +93,27 @@ public class HealthEntity : MonoBehaviour
 
         yield return null;
     }
+    #endregion
+
+    #region DamageFeedback
+
+    private IEnumerator DamageEffectCoroutine()
+    {
+        _spriteRd.color = Color.red;
+
+        float percent = 0f;
+
+        while (percent < 1f)
+        {
+            _spriteRd.color = Color.Lerp(Color.red, Color.white, percent);
+
+            percent += Time.deltaTime;
+
+            yield return null;
+        }
+
+        yield return null;
+    }
+
     #endregion
 }

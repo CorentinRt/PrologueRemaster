@@ -689,7 +689,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
-  _invincibilityCooldown: 0
+  _invincibilityCooldown: 2
+  _spriteRd: {fileID: 2556885612376567632}
 --- !u!1 &9156500555696736744
 GameObject:
   m_ObjectHideFlags: 0
