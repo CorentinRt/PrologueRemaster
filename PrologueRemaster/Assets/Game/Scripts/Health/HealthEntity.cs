@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,10 @@ public class HealthEntity : MonoBehaviour
 
     #endregion
 
+    public event Action OnTakeDamage;
+    public event Action OnTakeHeal;
+    public event Action OnDie;
+
     #region Test Function
     [Button] private void TakeDamage10() => TakeDamage(10);
     [Button] private void Heal10() => Heal(10);
@@ -43,6 +48,8 @@ public class HealthEntity : MonoBehaviour
             return;
         }
 
+        OnTakeDamage?.Invoke();
+
         StartInvincibility();
         _damageEffectCoroutine = StartCoroutine(DamageEffectCoroutine());
 
@@ -61,11 +68,14 @@ public class HealthEntity : MonoBehaviour
             return;
         }
 
+        OnTakeHeal?.Invoke();
+
         _currentHealth += value;
         _currentHealth = Mathf.Clamp(_currentHealth, 0, _maxHealth);
     }
     private void Die()
     {
+        OnDie?.Invoke();
         _isDead = true;
     }
 
