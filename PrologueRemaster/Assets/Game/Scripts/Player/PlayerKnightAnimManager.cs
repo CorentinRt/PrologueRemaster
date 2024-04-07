@@ -74,6 +74,6 @@ public class PlayerKnightAnimManager : MonoBehaviour
     }
     public void PlayDeathAnim()
     {
-        _animator.SetTrigger("die");
+        _animator.SetTrigger("isDead");
     }
 }
