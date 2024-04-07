@@ -26,7 +26,14 @@ public class PlayerMovements : MonoBehaviour
 
     private Coroutine _jumpGravityDownCoroutine;
 
+    private bool _isFalling;
+
     #endregion
+
+    public event Action OnJump;
+    public event Action OnFall;
+    public event Action OnStopFall;
+
 
     private void Start()
     {
@@ -62,7 +69,19 @@ public class PlayerMovements : MonoBehaviour
 
         _rb2D.velocity = tempVector;
     }
-
+    private void Update()
+    {
+        if (!_playerBehavior.GroundCheck() && _rb2D.velocity.y <= 0f && !_isFalling)
+        {
+            _isFalling = true;
+            OnFall?.Invoke();
+        }
+        else if (_playerBehavior.GroundCheck() && _isFalling)
+        {
+            _isFalling = false;
+            OnStopFall?.Invoke();
+        }
+    }
     private void StartMove(InputAction.CallbackContext context)
     {
         
@@ -98,6 +117,7 @@ public class PlayerMovements : MonoBehaviour
     {
         if (_playerBehavior.GroundCheck())
         {
+            OnJump?.Invoke();
             _rb2D.AddForce(transform.TransformDirection(Vector3.up) * _jumpForce, ForceMode2D.Impulse);
         }
     }

@@ -22,6 +22,13 @@ public class PlayerKnightAnimManager : MonoBehaviour
             _healthEntity.OnTakeHeal += PlayTakeHealAnim;
             _healthEntity.OnDie += PlayDeathAnim;
         }
+        if (_movements != null)
+        {
+            _movements.OnJump += PlayJumpAnim;
+
+            _movements.OnFall += PlayFallAnim;
+            _movements.OnStopFall += StopFallAnim;
+        }
     }
     private void OnDestroy()
     {
@@ -30,6 +37,13 @@ public class PlayerKnightAnimManager : MonoBehaviour
             _healthEntity.OnTakeDamage -= PlayTakeDamageAnim;
             _healthEntity.OnTakeHeal -= PlayTakeHealAnim;
             _healthEntity.OnDie -= PlayDeathAnim;
+        }
+        if (_movements != null)
+        {
+            _movements.OnJump -= PlayJumpAnim;
+
+            _movements.OnFall -= PlayFallAnim;
+            _movements.OnStopFall -= StopFallAnim;
         }
     }
 
@@ -40,11 +54,15 @@ public class PlayerKnightAnimManager : MonoBehaviour
 
     public void PlayJumpAnim()
     {
-
+        _animator.SetTrigger("jump");
     }
     public void PlayFallAnim()
     {
-
+        _animator.SetBool("isFalling", true);
+    }
+    public void StopFallAnim()
+    {
+        _animator.SetBool("isFalling", false);
     }
     public void PlayTakeDamageAnim()
     {
