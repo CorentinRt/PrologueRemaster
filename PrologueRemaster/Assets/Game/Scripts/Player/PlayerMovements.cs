@@ -28,6 +28,9 @@ public class PlayerMovements : MonoBehaviour
 
     private bool _isFalling;
 
+    [SerializeField] private float _jumpBufferTimer;
+    private Coroutine _jumpBufferCoroutine;
+
     #endregion
 
     public event Action OnJump;
@@ -45,7 +48,7 @@ public class PlayerMovements : MonoBehaviour
         _move.action.performed += UpdateMove;
         _move.action.canceled += StopMove;
 
-        _jump.action.started += Jump;
+        _jump.action.started += StartJump;
         _jump.action.canceled += StopJump;
     }
     private void OnDestroy()
@@ -54,7 +57,7 @@ public class PlayerMovements : MonoBehaviour
         _move.action.performed -= UpdateMove;
         _move.action.canceled -= StopMove;
 
-        _jump.action.started -= Jump;
+        _jump.action.started -= StartJump;
         _jump.action.canceled -= StopJump;
     }
 
@@ -113,11 +116,23 @@ public class PlayerMovements : MonoBehaviour
         _moveVector = Vector2.zero;
     }
 
-    private void Jump(InputAction.CallbackContext context)
+    private void StartJump(InputAction.CallbackContext context)
+    {
+        if (_jumpBufferCoroutine != null)
+        {
+            StopCoroutine( _jumpBufferCoroutine );
+        }
+
+        _jumpBufferCoroutine = StartCoroutine(JumpBufferCoroutine());
+    }
+    private void Jump()
     {
         if (_playerBehavior.GroundCheck())
         {
             OnJump?.Invoke();
+            Vector2 tempVect = _rb2D.velocity;
+            tempVect.y = 0f;
+            _rb2D.velocity = tempVect;
             _rb2D.AddForce(transform.TransformDirection(Vector3.up) * _jumpForce, ForceMode2D.Impulse);
         }
     }
@@ -146,6 +161,36 @@ public class PlayerMovements : MonoBehaviour
         }
 
         ResetGravityDownForce();
+
+        yield return null;
+    }
+    private void ResetJumpBuffer()
+    {
+        if (_jumpBufferCoroutine != null)
+        {
+            StopCoroutine(_jumpBufferCoroutine);
+            _jumpBufferCoroutine = null;
+        }
+    }
+    private IEnumerator JumpBufferCoroutine()
+    {
+        float currentTime = 0f;
+
+        while (currentTime < _jumpBufferTimer)
+        {
+            currentTime += Time.deltaTime;
+
+            if (_playerBehavior.GroundCheck())
+            {
+                Jump();
+
+                yield break;
+            }
+
+            yield return null;
+        }
+
+        ResetJumpBuffer();
 
         yield return null;
     }

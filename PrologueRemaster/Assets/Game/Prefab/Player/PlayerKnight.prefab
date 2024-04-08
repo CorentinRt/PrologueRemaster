@@ -162,6 +162,7 @@ MonoBehaviour:
   _moveSpeed: 300
   _jumpForce: 7
   _jumpGravityDownForce: 2
+  _jumpBufferTimer: 0.5
 --- !u!114 &2808684976596442908
 MonoBehaviour:
   m_ObjectHideFlags: 0
