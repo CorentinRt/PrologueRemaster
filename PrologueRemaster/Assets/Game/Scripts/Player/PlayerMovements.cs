@@ -31,6 +31,9 @@ public class PlayerMovements : MonoBehaviour
     [SerializeField] private float _jumpBufferTimer;
     private Coroutine _jumpBufferCoroutine;
 
+    [SerializeField] private float _jumpCoyoteTimer;
+    private float _jumpCoyoteCurrentCounter;
+
     #endregion
 
     public event Action OnJump;
@@ -84,6 +87,17 @@ public class PlayerMovements : MonoBehaviour
             _isFalling = false;
             OnStopFall?.Invoke();
         }
+
+        if (_playerBehavior.GroundCheck())  // Coyote time counter
+        {
+            _jumpCoyoteCurrentCounter = _jumpCoyoteTimer;
+        }
+        else
+        {
+            _jumpCoyoteCurrentCounter -= Time.deltaTime;
+        }
+
+        Debug.Log("Coyote counter : " + _jumpCoyoteCurrentCounter);
     }
     private void StartMove(InputAction.CallbackContext context)
     {
@@ -127,8 +141,10 @@ public class PlayerMovements : MonoBehaviour
     }
     private void Jump()
     {
-        if (_playerBehavior.GroundCheck())
+        if (_playerBehavior.GroundCheck() || _jumpCoyoteCurrentCounter > 0f)
         {
+            _jumpCoyoteCurrentCounter = 0f;
+
             OnJump?.Invoke();
             Vector2 tempVect = _rb2D.velocity;
             tempVect.y = 0f;
@@ -181,6 +197,12 @@ public class PlayerMovements : MonoBehaviour
             currentTime += Time.deltaTime;
 
             if (_playerBehavior.GroundCheck())
+            {
+                Jump();
+
+                yield break;
+            }
+            else if (_jumpCoyoteCurrentCounter > 0f)   // Coyote Time Detection
             {
                 Jump();
 
