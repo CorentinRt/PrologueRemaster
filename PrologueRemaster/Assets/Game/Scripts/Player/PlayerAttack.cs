@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,8 @@ public class PlayerAttack : MonoBehaviour
 
     #endregion
 
+    public event Action OnAttack1;
+
     private void Start()
     {
         _canAttack = true;
@@ -40,6 +43,8 @@ public class PlayerAttack : MonoBehaviour
         {
             return;
         }
+
+        OnAttack1?.Invoke();
 
         _canAttack = false;
         _hitEntity.gameObject.SetActive(true);

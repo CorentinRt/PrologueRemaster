@@ -10,6 +10,8 @@ public class PlayerKnightAnimManager : MonoBehaviour
 
     [SerializeField] private HealthEntity _healthEntity;
 
+    [SerializeField] private PlayerAttack _playerAttack;
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -32,6 +34,10 @@ public class PlayerKnightAnimManager : MonoBehaviour
             _movements.OnFall += PlayFallAnim;
             _movements.OnStopFall += StopFallAnim;
         }
+        if (_playerAttack)
+        {
+            _playerAttack.OnAttack1 += PlayAttack1Anim;
+        }
     }
     private void OnDestroy()
     {
@@ -51,11 +57,15 @@ public class PlayerKnightAnimManager : MonoBehaviour
             _movements.OnFall -= PlayFallAnim;
             _movements.OnStopFall -= StopFallAnim;
         }
+        if (_playerAttack)
+        {
+            _playerAttack.OnAttack1 -= PlayAttack1Anim;
+        }
     }
 
     public void PlayAttack1Anim()
     {
-        
+        _animator.SetTrigger("attack1");
     }
 
     public void StartRunAnim()

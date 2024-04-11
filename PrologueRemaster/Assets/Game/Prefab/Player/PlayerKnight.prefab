@@ -462,6 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movements: {fileID: 6386284062995060364}
   _healthEntity: {fileID: 6879600389865699349}
+  _playerAttack: {fileID: 2808684976596442908}
 --- !u!1 &7118745680720115767
 GameObject:
   m_ObjectHideFlags: 0

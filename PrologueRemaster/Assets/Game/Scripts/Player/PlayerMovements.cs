@@ -99,7 +99,7 @@ public class PlayerMovements : MonoBehaviour
             _jumpCoyoteCurrentCounter -= Time.deltaTime;
         }
 
-        Debug.Log("Coyote counter : " + _jumpCoyoteCurrentCounter);
+        //Debug.Log("Coyote counter : " + _jumpCoyoteCurrentCounter);
     }
     private void StartMove(InputAction.CallbackContext context)
     {
