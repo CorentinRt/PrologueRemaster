@@ -24,6 +24,9 @@ public class PlayerKnightAnimManager : MonoBehaviour
         }
         if (_movements != null)
         {
+            _movements.OnStartMove += StartRunAnim;
+            _movements.OnStopMove += StopRunAnim;
+
             _movements.OnJump += PlayJumpAnim;
 
             _movements.OnFall += PlayFallAnim;
@@ -40,6 +43,9 @@ public class PlayerKnightAnimManager : MonoBehaviour
         }
         if (_movements != null)
         {
+            _movements.OnStartMove -= StartRunAnim;
+            _movements.OnStopMove -= StopRunAnim;
+
             _movements.OnJump -= PlayJumpAnim;
 
             _movements.OnFall -= PlayFallAnim;
@@ -49,9 +55,17 @@ public class PlayerKnightAnimManager : MonoBehaviour
 
     public void PlayAttack1Anim()
     {
-
+        
     }
 
+    public void StartRunAnim()
+    {
+        _animator.SetBool("isRunning", true);
+    }
+    public void StopRunAnim()
+    {
+        _animator.SetBool("isRunning", false);
+    }
     public void PlayJumpAnim()
     {
         _animator.SetTrigger("jump");

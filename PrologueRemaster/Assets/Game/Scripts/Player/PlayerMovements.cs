@@ -36,6 +36,8 @@ public class PlayerMovements : MonoBehaviour
 
     #endregion
 
+    public event Action OnStartMove;
+    public event Action OnStopMove;
     public event Action OnJump;
     public event Action OnFall;
     public event Action OnStopFall;
@@ -101,7 +103,7 @@ public class PlayerMovements : MonoBehaviour
     }
     private void StartMove(InputAction.CallbackContext context)
     {
-        
+        OnStartMove?.Invoke();
     }
 
     private void UpdateMove(InputAction.CallbackContext context)
@@ -127,6 +129,7 @@ public class PlayerMovements : MonoBehaviour
 
     private void StopMove(InputAction.CallbackContext context)
     {
+        OnStopMove?.Invoke();
         _moveVector = Vector2.zero;
     }
 
