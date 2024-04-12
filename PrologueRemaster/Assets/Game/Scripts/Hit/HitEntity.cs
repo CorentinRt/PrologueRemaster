@@ -28,6 +28,16 @@ public class HitEntity : MonoBehaviour
             Damage(healthProxy.HealthEntity);
             Debug.Log("Damage to : " + healthProxy.HealthEntity.gameObject.name);
         }
+        if (gameObject.TryGetComponent<HitKnockBackProxy>(out HitKnockBackProxy knockBackProxy))
+        {
+            Vector2 dir = new Vector2();
+            dir.x = gameObject.transform.position.x - transform.position.x;
+            dir.y = gameObject.transform.position.y - (transform.position.y - 1f);
+            float strengt = dir.magnitude;
+            dir = dir.normalized;
+            knockBackProxy.HitKnockBack.KnockBack(dir, strengt);
+            Debug.Log("KnockBack");
+        }
     }
 
     private void Damage(HealthEntity entity)

@@ -194,6 +194,7 @@ GameObject:
   - component: {fileID: 6111851134917294291}
   - component: {fileID: 3185398503038175473}
   - component: {fileID: 9015976010982002284}
+  - component: {fileID: 2758492185554201920}
   m_Layer: 0
   m_Name: CapsuleCollider
   m_TagString: Untagged
@@ -264,6 +265,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthEntity: {fileID: 8129526317677361267}
+--- !u!114 &2758492185554201920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3018864176432985525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd8eea611d0b6a4387b14e796cfecc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hitKnockBack: {fileID: 1498915111317630144}
 --- !u!1 &3832897523840059362
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,6 +289,7 @@ GameObject:
   - component: {fileID: 3669523550517531744}
   - component: {fileID: 5039557980180440078}
   - component: {fileID: 8129526317677361267}
+  - component: {fileID: 1498915111317630144}
   m_Layer: 0
   m_Name: BanditLight
   m_TagString: Untagged
@@ -342,6 +357,20 @@ MonoBehaviour:
   _maxHealth: 50
   _invincibilityCooldown: 1
   _spriteRd: {fileID: 5450530017536045436}
+--- !u!114 &1498915111317630144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3832897523840059362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fdff19181236f94996b109c1f6ee505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rb2D: {fileID: 5039557980180440078}
+  _knockBackAdjustment: 3
 --- !u!1 &5355742617772374485
 GameObject:
   m_ObjectHideFlags: 0
