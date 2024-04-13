@@ -645,6 +645,7 @@ GameObject:
   - component: {fileID: 5590676321207872972}
   - component: {fileID: 8380550244853917410}
   - component: {fileID: 6879600389865699349}
+  - component: {fileID: 5339657462385082603}
   m_Layer: 0
   m_Name: PlayerKnight
   m_TagString: Untagged
@@ -731,6 +732,20 @@ MonoBehaviour:
   _maxHealth: 100
   _invincibilityCooldown: 2
   _spriteRd: {fileID: 2556885612376567632}
+--- !u!114 &5339657462385082603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9123504176823393354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d8da0d53ab65a043b91f03154111e6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isRewinding: 0
+  _recordTime: 5
 --- !u!1 &9156500555696736744
 GameObject:
   m_ObjectHideFlags: 0
