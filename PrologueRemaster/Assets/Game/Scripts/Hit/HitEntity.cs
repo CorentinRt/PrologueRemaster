@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class HitEntity : MonoBehaviour
     [SerializeField] private int _damageValue;
 
     #endregion
+
+    public event Action OnHit;
 
     private void Start()
     {
@@ -25,6 +28,8 @@ public class HitEntity : MonoBehaviour
         Debug.Log("Collision");
         if (gameObject.TryGetComponent<HealthProxy>(out HealthProxy healthProxy))
         {
+            OnHit?.Invoke();
+
             Damage(healthProxy.HealthEntity);
             Debug.Log("Damage to : " + healthProxy.HealthEntity.gameObject.name);
         }

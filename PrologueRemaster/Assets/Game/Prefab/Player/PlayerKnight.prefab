@@ -389,6 +389,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerSoundsData: {fileID: 11400000, guid: 7607a06c26322b04db7c2989094566a3, type: 2}
   _playerMovements: {fileID: 6386284062995060364}
+  _playerAttack: {fileID: 2808684976596442908}
+  _hitEntity: {fileID: 8454069590574736316}
 --- !u!1 &5569808524236036382
 GameObject:
   m_ObjectHideFlags: 0

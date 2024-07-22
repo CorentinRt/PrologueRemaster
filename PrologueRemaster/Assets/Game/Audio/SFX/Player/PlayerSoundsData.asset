@@ -29,3 +29,17 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0f1dc5ef108a4614fb3e156f5cd2d462, type: 3}
   - {fileID: 8300000, guid: 56cf470bce0315645b0fab65cca24027, type: 3}
   - {fileID: 8300000, guid: 616a0cae5d700f942a26179a4d220d6a, type: 3}
+  _playerSwordSwings:
+  - {fileID: 8300000, guid: 64032e441a5da3349b5ffd4fdee67783, type: 3}
+  - {fileID: 8300000, guid: 6eac82b953b3a6245b6edac8713e2cb7, type: 3}
+  - {fileID: 8300000, guid: 59b527170e99dd84d8efd76b34d25e2e, type: 3}
+  - {fileID: 8300000, guid: 3b761a68b1b2c4949ac1fc8d5f1b94e7, type: 3}
+  _playerSwordImpact:
+  - {fileID: 8300000, guid: 162c2556b0aa7ca47a775e738a6d8071, type: 3}
+  - {fileID: 8300000, guid: 5a51c8e5dd1775545a2bf9a4b7dade9e, type: 3}
+  - {fileID: 8300000, guid: f1900d43c4415084dab8051681b83f10, type: 3}
+  - {fileID: 8300000, guid: fbaad6ad702c63443b16a0d1a0029d16, type: 3}
+  - {fileID: 8300000, guid: 0bc135d4ae45afb46b6a4cc50748761f, type: 3}
+  - {fileID: 8300000, guid: 18994bffbe1a57f41a38fd6407c0bd45, type: 3}
+  - {fileID: 8300000, guid: 780e604c1df8ecb4182e128194b56dac, type: 3}
+  - {fileID: 8300000, guid: 03a5f154f6626c942a5fc3fef41507f9, type: 3}
